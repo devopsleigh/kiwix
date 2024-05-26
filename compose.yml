@@ -4,6 +4,7 @@ services:
 #        - 8080:8080
     image: ghcr.io/kiwix/kiwix-serve:latest
     container_name: ${SERVICE_NAME}
+    restart: unless-stopped
     volumes:
       - ./data:/data
     command:
