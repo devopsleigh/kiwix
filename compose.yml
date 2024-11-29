@@ -1,4 +1,5 @@
 services:
+
   kiwix:
     image: ghcr.io/kiwix/kiwix-serve:latest
     container_name: ${SERVICE_NAME}
@@ -10,8 +11,13 @@ services:
     security_opt:
       - no-new-privileges:true
     networks:
-      proxy:
+      - proxy
     labels:
+      - "homepage.name=Kiwix"
+      - "homepage.description=Offline wiki reader"
+      - "homepage.icon=kiwix"
+      - "homepage.href=https://${SERVICE_NAME}.${MY_DOMAIN}"
+      - "homepage.group=Utilities"
       - "traefik.enable=true"
       - "traefik.http.routers.${SERVICE_NAME}.entrypoints=http"
       - "traefik.http.routers.${SERVICE_NAME}.rule=Host(`${SERVICE_NAME}.${MY_DOMAIN}`)"
